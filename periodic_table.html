@@ -1,0 +1,1044 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Periodic Table</title>
+    <style type="text/css" media="all">
+        :root {
+            color: white;
+            box-sizing: border-box;
+            padding: 0;
+            margin: 0;
+            font-size: 10px;
+            font-family: arial;
+        }
+        
+        .container {
+            background-image: linear-gradient(to bottom right, #2F51BD, #000002);
+            height: 50rem;
+            width: 83.5rem;
+            position: absolute;
+            margin: auto;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            padding: 2rem 1rem;
+        }
+        
+        h1 {
+            line-height: 1rem;
+            font-size: 1rem;
+            font-weight: 900;
+        }
+        
+        span {
+            display: inline-block;
+            font-weight: 600;
+            color: black;
+            text-align: center;
+        }
+        
+        .guide {
+            display: grid;
+            grid-template-columns: auto auto;
+            grid-template-rows: auto auto;
+            justify-content: center;
+            width: 35rem;
+            position: relative;
+            margin: auto;
+            right: 8rem;
+            bottom: -2rem;
+        }
+        
+        .example {
+            height: 5rem;
+            width: 4.5rem;
+            border: .2rem outset #F2FBFF;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .symbol {
+            font-size: 1.5rem;
+            color: white;
+            margin: 0 .5rem;
+        }
+        
+        .name {
+            font-size: .75rem;
+        }
+        
+        .weigth {
+            font-weight: 400;
+            font-size: .75rem;
+        }
+        
+        .hydrogen {
+            background: #6F8089;
+        }
+        
+        .description span {
+            display: flex;
+            flex-direction: column;
+            text-align: left;
+            color: white;
+            font-size: .75rem;
+        }
+        
+        .color_codes {
+            display: grid;
+            grid-column: 1/span 2;
+            grid-template-rows: auto auto auto auto;
+            grid-template-columns: 12rem 12rem 12rem;
+        }
+        
+        .color {
+            display: inline-block;
+            height: .5rem;
+            width: .5rem;
+        }
+        
+        .type {
+            color: white;
+        }
+        
+        .code_pair {
+            font-size: 1rem;
+        }
+        
+        .metals {
+            background-image: linear-gradient(to bottom right, #666668, #CDCDCD, #F6F9FA);
+        }
+        
+        .non_metals {
+            background-image: linear-gradient(to bottom right, #6D808C, #6D808C);
+        }
+        
+        .alkali {
+            background-image: linear-gradient(to bottom right, #FBFEE3, #6C850F, #E3F58F);
+        }
+        
+        .alkali_earth {
+            background-image: linear-gradient(to bottom right, #EFFFF8, #218C58, #B7FFDE);
+        }
+        
+        .transition {
+            background-image: linear-gradient(to bottom right, #F0FCFC, #1076C1, #DBFFFF);
+        }
+        
+        .lanthanoids {
+            background-image: linear-gradient(to bottom right, #FFFEDF, #7E6E00, #FFFF95);
+        }
+        
+        .actinoids {
+            background-image: linear-gradient(to bottom right, #FFFDE9, #966200, #FFE5AD);
+        }
+        
+        .metalloids {
+            background-image: linear-gradient(to bottom right, #FFE7E6, #BA4139, #FFBEB8);
+        }
+        
+        .halogens {
+            background-image: linear-gradient(to bottom right, #947C3C, #9C7C3F);
+        }
+        
+        .nobel_gases {
+            background-image: linear-gradient(to bottom right, #7478B5, #7478B5);
+        }
+        
+        .block1 {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .block1>div,
+        .block2>div,
+        .block3>div,
+        .block4>div {
+            display: flex;
+            flex-direction: row;
+        }
+        
+        .element {
+            display: flex;
+            flex-direction: column;
+            height: 5rem;
+            width: 4.5rem;
+            border: .001rem solid white;
+        }
+        
+        .element .symbol,
+        .element .number {
+            font-size: 1rem;
+        }
+        
+        .element .weigth,
+        .element .name {
+            font-size: .2rem;
+        }
+        
+        .block2 {
+            position: absolute;
+            left: 10.2rem;
+            top: 19.25rem;
+        }
+        
+        .block1 {
+            position: absolute;
+            top: 4rem;
+        }
+        
+        .block3 {
+            position: absolute;
+            right: 1.7rem;
+            top: 3.9rem;
+        }
+        
+        .block4 {
+            position: absolute;
+            right: 3.7rem;
+            top: 42rem;
+        }
+        
+        .groupCol {
+            width: 7rem;
+        }
+        
+        .block3 .row2 {
+            flex-direction: row-reverse;
+        }
+        
+        .transition.lanthanoids {
+            background-image: linear-gradient(to bottom right, #F0FCFC, #1076C1, #7E6E00, #FFFF95);
+        }
+        
+        .transition.actinoids {
+            background-image: linear-gradient(to bottom right, #F0FCFC, #1076C1, #966200, #FFE5AD);
+        }
+        
+        .group {
+            width: 4.6rem;
+            color: white;
+        }
+        
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>The Periodic Table</h1>
+        <div class="guide">
+            <div class="example hydrogen">
+                <span class="number">1</span>
+                <span class="symbol">H</span>
+                <span class="name">hydrogen</span>
+                <span class="weigth">1.007</span>
+            </div>
+            <div class="description">
+                <span>Atomic Number</span>
+                <span>Symbol</span>
+                <span>Name</span>
+                <span>Standard Atomic Weigth</span>
+            </div>
+            <div class="color_codes">
+                <div class="code_pair">
+                    <span class="color metals"></span>
+                    <span class="type">Metals</span>
+                </div>
+                <div class="code_pair">
+                    <span class="color non_metals"></span>
+                    <span class="type">Non-metals</span>
+                </div>
+                <div class="code_pair">
+                    <span class="color alkali"></span>
+                    <span class="type">Alkali Metals</span>
+                </div>
+                <div class="code_pair">
+                    <span class="color alkali_earth"></span>
+                    <span class="type">Alkali Earth Metals</span>
+                </div>
+                <div class="code_pair">
+                    <span class="color transition"></span>
+                    <span class="type">Transition Metals</span>
+                </div>
+                <div class="code_pair">
+                    <span class="color lanthanoids"></span>
+                    <span class="type">Lanthanoids</span>
+                </div>
+                <div class="code_pair">
+                    <span class="color actinoids"></span>
+                    <span class="type"></span>
+                </div>
+                <div class="code_pair">
+                    <span class="color metalloids"></span>
+                    <span class="type">Metalloids</span>
+                </div>
+                <div class="code_pair">
+                    <span class="color halogens"></span>
+                    <span class="type">Halogens</span>
+                </div>
+                <div class="code_pair">
+                    <span class="color nobel_gases"></span>
+                    <span class="type">Nobel Gases</span>
+                </div>
+            </div>
+        </div>
+        <div class="block1">
+            <div class="row1">
+                <span class="group">1</span>
+                <span class="group">2</span>
+            </div>
+            <div class="row2">
+                <div class="element col hydrogen">
+                    <span class="number">1</span>
+                    <span class="symbol">H</span>
+                    <span class="name">hydrogen</span>
+                    <span class="weigth">1.007</span>
+                </div>
+            </div>
+            <div class="row3">
+                <div class="element col alkali">
+                    <span class="number">3</span>
+                    <span class="symbol">Li</span>
+                    <span class="name">lithium</span>
+                    <span class="weigth">6.941</span>
+                </div>
+                <div class="element col alkali_earth">
+                    <span class="number">4</span>
+                    <span class="symbol">Be</span>
+                    <span class="name">beryllium</span>
+                    <span class="weigth">9.012</span>
+                </div>
+            </div>
+            <div class="row4">
+                <div class="element col alkali">
+                    <span class="number">11</span>
+                    <span class="symbol">Na</span>
+                    <span class="name">sodium</span>
+                    <span class="weigth">22.989</span>
+                </div>
+                <div class="element col alkali_earth">
+                    <span class="number">12</span>
+                    <span class="symbol">Mg</span>
+                    <span class="name">magnesium</span>
+                    <span class="weigth">24.305</span>
+                </div>
+            </div>
+            <div class="row5">
+                <div class="element col alkali">
+                    <span class="number">19</span>
+                    <span class="symbol">K</span>
+                    <span class="name">potassium</span>
+                    <span class="weigth">39.098</span>
+                </div>
+                <div class="element col alkali_earth">
+                    <span class="number">20</span>
+                    <span class="symbol">Ca</span>
+                    <span class="name">calcium</span>
+                    <span class="weigth">40.078</span>
+                </div>
+            </div>
+            <div class="row6">
+                <div class="element col alkali">
+                    <span class="number">37</span>
+                    <span class="symbol">Rb</span>
+                    <span class="name">rubidium</span>
+                    <span class="weigth">85.468</span>
+                </div>
+                <div class="element col alkali_earth">
+                    <span class="number">38</span>
+                    <span class="symbol">Sr</span>
+                    <span class="name">strontium</span>
+                    <span class="weigth">87.620</span>
+                </div>
+            </div>
+            <div class="row7">
+                <div class="element col alkali">
+                    <span class="number">55</span>
+                    <span class="symbol">Cs</span>
+                    <span class="name">caesium</span>
+                    <span class="weigth">132.905</span>
+                </div>
+                <div class="element col alkali_earth">
+                    <span class="number">56</span>
+                    <span class="symbol">Ba</span>
+                    <span class="name">barium</span>
+                    <span class="weigth">137.327</span>
+                </div>
+            </div>
+            <div class="row8">
+                <div class="element col alkali">
+                    <span class="number">87</span>
+                    <span class="symbol">Fr</span>
+                    <span class="name">francium</span>
+                    <span class="weigth">[223]</span>
+                </div>
+                <div class="element col alkali_earth">
+                    <span class="number">88</span>
+                    <span class="symbol">Ra</span>
+                    <span class="name">radium</span>
+                    <span class="weigth">[226]</span>
+                </div>
+            </div>
+        </div>
+        <div class="block2">
+            <div class="row1">
+                <span class="group">3</span>
+                <span class="group">4</span>
+                <span class="group">5</span>
+                <span class="group">6</span>
+                <span class="group">7</span>
+                <span class="group">8</span>
+                <span class="group">9</span>
+                <span class="group">10</span>
+                <span class="group">11</span>
+                <span class="group">12</span>
+            </div>
+            <div class="row2">
+                <div class="element col transition">
+                    <span class="number">21</span>
+                    <span class="symbol">Sc</span>
+                    <span class="name">scandium</span>
+                    <span class="weigth">44.955</span>
+                </div>
+                <div class="element col transition">
+                    <span class="number">22</span>
+                    <span class="symbol">Ti</span>
+                    <span class="name">titanium</span>
+                    <span class="weigth">47.867</span>
+                </div>
+                <div class="element col transition">
+                    <span class="number">23</span>
+                    <span class="symbol">V</span>
+                    <span class="name">vanadium</span>
+                    <span class="weigth">50.941</span>
+                </div>
+                <div class="element col transition">
+                    <span class="number">24</span>
+                    <span class="symbol">Cr</span>
+                    <span class="name">chronium</span>
+                    <span class="weigth">51.996</span>
+                </div>
+                <div class="element col transition">
+                    <span class="number">25</span>
+                    <span class="symbol">Mn</span>
+                    <span class="name">manganese</span>
+                    <span class="weigth">54.938 045</span>
+                </div>
+                <div class="element col transition">
+                    <span class="number">26</span>
+                    <span class="symbol">Fe</span>
+                    <span class="name">iron</span>
+                    <span class="weigth">55.845</span>
+                </div>
+                <div class="element col transition">
+                    <span class="number">27</span>
+                    <span class="symbol">Co</span>
+                    <span class="name">colbalt</span>
+                    <span class="weigth">58.933</span>
+                </div>
+                <div class="element col transition">
+                    <span class="number">28</span>
+                    <span class="symbol">Ni</span>
+                    <span class="name">nickel</span>
+                    <span class="weigth">58.693</span>
+                </div>
+                <div class="element col transition">
+                    <span class="number">29</span>
+                    <span class="symbol">Cu</span>
+                    <span class="name">copper</span>
+                    <span class="weigth">63.546</span>
+                </div>
+                <div class="element col metals">
+                    <span class="number">30</span>
+                    <span class="symbol">Zn</span>
+                    <span class="name">zinc</span>
+                    <span class="weigth">65.409</span>
+                </div>
+            </div>
+            <div class="row3">
+                <div class="element col transition">
+                    <span class="number">39</span>
+                    <span class="symbol">Y</span>
+                    <span class="name">yttrium</span>
+                    <span class="weigth">88.905</span>
+                </div>
+                <div class="element col transition">
+                    <span class="number">40</span>
+                    <span class="symbol">Zr</span>
+                    <span class="name">zirconium</span>
+                    <span class="weigth">47.867</span>
+                </div>
+                <div class="element col transition">
+                    <span class="number">41</span>
+                    <span class="symbol">Nb</span>
+                    <span class="name">niobium</span>
+                    <span class="weigth">92.906</span>
+                </div>
+                <div class="element col transition">
+                    <span class="number">42</span>
+                    <span class="symbol">Mo</span>
+                    <span class="name">molybdenum</span>
+                    <span class="weigth">95.940</span>
+                </div>
+                <div class="element col transition">
+                    <span class="number">43</span>
+                    <span class="symbol">Tc</span>
+                    <span class="name">technetium</span>
+                    <span class="weigth">[98]</span>
+                </div>
+                <div class="element col transition">
+                    <span class="number">44</span>
+                    <span class="symbol">Ru</span>
+                    <span class="name">ruthenium</span>
+                    <span class="weigth">101.070</span>
+                </div>
+                <div class="element col transition">
+                    <span class="number">45</span>
+                    <span class="symbol">Rh</span>
+                    <span class="name">rhodium</span>
+                    <span class="weigth">102.905</span>
+                </div>
+                <div class="element col transition">
+                    <span class="number">46</span>
+                    <span class="symbol">Pd</span>
+                    <span class="name">palladium</span>
+                    <span class="weigth">106.42</span>
+                </div>
+                <div class="element col transition">
+                    <span class="number">47</span>
+                    <span class="symbol">Ag</span>
+                    <span class="name">silver</span>
+                    <span class="weigth">107.868</span>
+                </div>
+                <div class="element col metals">
+                    <span class="number">48</span>
+                    <span class="symbol">Cd</span>
+                    <span class="name">cadnium</span>
+                    <span class="weigth">112.411</span>
+                </div>
+            </div>
+            <div class="row4">
+                <div class="element col transition lanthanoids">
+                    <span class="number">57-71</span>
+                    <span class="symbol">La-Li</span>
+                    <span class="name">lanthanoids</span>
+                    <span class="weigth"></span>
+                </div>
+                <div class="element col transition">
+                    <span class="number">72</span>
+                    <span class="symbol">Hf</span>
+                    <span class="name">hafnium</span>
+                    <span class="weigth">178.400</span>
+                </div>
+                <div class="element col transition">
+                    <span class="number">73</span>
+                    <span class="symbol">Td</span>
+                    <span class="name">tantalum</span>
+                    <span class="weigth">180.947</span>
+                </div>
+                <div class="element col transition">
+                    <span class="number">74</span>
+                    <span class="symbol">W</span>
+                    <span class="name">tungsten</span>
+                    <span class="weigth">183.840</span>
+                </div>
+                <div class="element col transition">
+                    <span class="number">75</span>
+                    <span class="symbol">Re</span>
+                    <span class="name">rhenium</span>
+                    <span class="weigth">186.207</span>
+                </div>
+                <div class="element col transition">
+                    <span class="number">76</span>
+                    <span class="symbol">Os</span>
+                    <span class="name">osmium</span>
+                    <span class="weigth">190.230</span>
+                </div>
+                <div class="element col transition">
+                    <span class="number">77</span>
+                    <span class="symbol">Ir</span>
+                    <span class="name">iridium</span>
+                    <span class="weigth">58.933</span>
+                </div>
+                <div class="element col transition">
+                    <span class="number">78</span>
+                    <span class="symbol">Pt</span>
+                    <span class="name">platnium</span>
+                    <span class="weigth">195.084</span>
+                </div>
+                <div class="element col transition">
+                    <span class="number">79</span>
+                    <span class="symbol">Au</span>
+                    <span class="name">gold</span>
+                    <span class="weigth">196.966</span>
+                </div>
+                <div class="element col metals">
+                    <span class="number">80</span>
+                    <span class="symbol">Hg</span>
+                    <span class="name">mercury</span>
+                    <span class="weigth">200.590</span>
+                </div>
+            </div>
+            <div class="row5">
+                <div class="element col transition actinoids">
+                    <span class="number">89-103</span>
+                    <span class="symbol">Ac-Lr</span>
+                    <span class="name">actinoids</span>
+                    <span class="weigth"></span>
+                </div>
+                <div class="element col transition">
+                    <span class="number">204</span>
+                    <span class="symbol">Rf</span>
+                    <span class="name">rutherfordium</span>
+                    <span class="weigth">[261]</span>
+                </div>
+                <div class="element col transition">
+                    <span class="number">105</span>
+                    <span class="symbol">Db</span>
+                    <span class="name">dubrium</span>
+                    <span class="weigth">[262]</span>
+                </div>
+                <div class="element col transition">
+                    <span class="number">106</span>
+                    <span class="symbol">Sg</span>
+                    <span class="name">seaborgium</span>
+                    <span class="weigth">[266]</span>
+                </div>
+                <div class="element col transition">
+                    <span class="number">107</span>
+                    <span class="symbol">Bh</span>
+                    <span class="name">bohrium</span>
+                    <span class="weigth">[264]</span>
+                </div>
+                <div class="element col transition">
+                    <span class="number">108</span>
+                    <span class="symbol">Hs</span>
+                    <span class="name">hassium</span>
+                    <span class="weigth">[277]</span>
+                </div>
+                <div class="element col transition">
+                    <span class="number">109</span>
+                    <span class="symbol">Mt</span>
+                    <span class="name">meitnerium</span>
+                    <span class="weigth">[268]</span>
+                </div>
+                <div class="element col transition">
+                    <span class="number">110</span>
+                    <span class="symbol">Ds</span>
+                    <span class="name">darmstadtium</span>
+                    <span class="weigth">[271]</span>
+                </div>
+                <div class="element col transition">
+                    <span class="number">111</span>
+                    <span class="symbol">Rg</span>
+                    <span class="name">roentgenium</span>
+                    <span class="weigth">[272]</span>
+                </div>
+            </div>
+        </div>
+        <div class="block3">
+            <div class="row1">
+                <span class="group">13</span>
+                <span class="group">14</span>
+                <span class="group">15</span>
+                <span class="group">16</span>
+                <span class="group">17</span>
+                <span class="group">18</span>
+            </div>
+            <div class="row2">
+                <div class="element col nobel_gases">
+                    <span class="number">2</span>
+                    <span class="symbol">He</span>
+                    <span class="name">helium</span>
+                    <span class="weigth">4.002</span>
+                </div>
+            </div>
+            <div class="row3">
+                <div class="element col metalloids">
+                    <span class="number">5</span>
+                    <span class="symbol">B</span>
+                    <span class="name">boron</span>
+                    <span class="weigth">10.813</span>
+                </div>
+                <div class="element col non_metals">
+                    <span class="number">6</span>
+                    <span class="symbol">C</span>
+                    <span class="name">carbon</span>
+                    <span class="weigth">12.012</span>
+                </div>
+                <div class="element col non_metals">
+                    <span class="number">7</span>
+                    <span class="symbol">N</span>
+                    <span class="name">nitrogen</span>
+                    <span class="weigth">14.007</span>
+                </div>
+                <div class="element col non_metals">
+                    <span class="number">8</span>
+                    <span class="symbol">O</span>
+                    <span class="name">oxygen</span>
+                    <span class="weigth">15.999</span>
+                </div>
+                <div class="element col halogens">
+                    <span class="number">9</span>
+                    <span class="symbol">F</span>
+                    <span class="name">flourine</span>
+                    <span class="weigth">18.998</span>
+                </div>
+                <div class="element col nobel_gases">
+                    <span class="number">10</span>
+                    <span class="symbol">Ne</span>
+                    <span class="name">neon</span>
+                    <span class="weigth">20.180</span>
+                </div>
+            </div>
+            <div class="row4">
+                <div class="element col metals">
+                    <span class="number">13</span>
+                    <span class="symbol">Al</span>
+                    <span class="name">aluminium</span>
+                    <span class="weigth">26.981</span>
+                </div>
+                <div class="element col metalloids">
+                    <span class="number">14</span>
+                    <span class="symbol">Si</span>
+                    <span class="name">silicon</span>
+                    <span class="weigth">28.855</span>
+                </div>
+                <div class="element col non_metals">
+                    <span class="number">15</span>
+                    <span class="symbol">P</span>
+                    <span class="name">phosphorus</span>
+                    <span class="weigth">30.973</span>
+                </div>
+                <div class="element col non_metals">
+                    <span class="number">16</span>
+                    <span class="symbol">S</span>
+                    <span class="name">sulphur</span>
+                    <span class="weigth">32.065</span>
+                </div>
+                <div class="element col halogens">
+                    <span class="number">17</span>
+                    <span class="symbol">Cl</span>
+                    <span class="name">chlorine</span>
+                    <span class="weigth">35.453</span>
+                </div>
+                <div class="element col nobel_gases">
+                    <span class="number">18</span>
+                    <span class="symbol">Ar</span>
+                    <span class="name">argon</span>
+                    <span class="weigth">39.948</span>
+                </div>
+            </div>
+            <div class="row5">
+                <div class="element col metals">
+                    <span class="number">31</span>
+                    <span class="symbol">Ga</span>
+                    <span class="name">gallium</span>
+                    <span class="weigth">69.723</span>
+                </div>
+                <div class="element col metalloids">
+                    <span class="number">32</span>
+                    <span class="symbol">Ge</span>
+                    <span class="name">germanium</span>
+                    <span class="weigth">72.640</span>
+                </div>
+                <div class="element col metalloids">
+                    <span class="number">33</span>
+                    <span class="symbol">As</span>
+                    <span class="name">arsenic</span>
+                    <span class="weigth">74.921</span>
+                </div>
+                <div class="element col non_metals">
+                    <span class="number">34</span>
+                    <span class="symbol">Se</span>
+                    <span class="name">selenium</span>
+                    <span class="weigth">78.960</span>
+                </div>
+                <div class="element col halogens">
+                    <span class="number">35</span>
+                    <span class="symbol">Br</span>
+                    <span class="name">bromine</span>
+                    <span class="weigth">79.904</span>
+                </div>
+                <div class="element col nobel_gases">
+                    <span class="number">36</span>
+                    <span class="symbol">Kr</span>
+                    <span class="name">krypton</span>
+                    <span class="weigth">83.798</span>
+                </div>
+            </div>
+            <div class="row6">
+                <div class="element col metals">
+                    <span class="number">49</span>
+                    <span class="symbol">In</span>
+                    <span class="name">indium</span>
+                    <span class="weigth">114.818</span>
+                </div>
+                <div class="element col metals">
+                    <span class="number">50</span>
+                    <span class="symbol">Sn</span>
+                    <span class="name">tin</span>
+                    <span class="weigth">118.710</span>
+                </div>
+                <div class="element col metalloids">
+                    <span class="number">51</span>
+                    <span class="symbol">Sb</span>
+                    <span class="name">antimony</span>
+                    <span class="weigth">121.760</span>
+                </div>
+                <div class="element col metalloids">
+                    <span class="number">52</span>
+                    <span class="symbol">Te</span>
+                    <span class="name">tellurium</span>
+                    <span class="weigth">127.600</span>
+                </div>
+                <div class="element col halogens">
+                    <span class="number">53</span>
+                    <span class="symbol">I</span>
+                    <span class="name">iodine</span>
+                    <span class="weigth">126.600</span>
+                </div>
+                <div class="element col nobel_gases">
+                    <span class="number">54</span>
+                    <span class="symbol">Xe</span>
+                    <span class="name">helium</span>
+                    <span class="weigth">131.293</span>
+                </div>
+            </div>
+            <div class="row7">
+                <div class="element col metals">
+                    <span class="number">81</span>
+                    <span class="symbol">Ti</span>
+                    <span class="name">thallium</span>
+                    <span class="weigth">204.383</span>
+                </div>
+                <div class="element col metals">
+                    <span class="number">82</span>
+                    <span class="symbol">Pb</span>
+                    <span class="name">lead</span>
+                    <span class="weigth">297.200</span>
+                </div>
+                <div class="element col metals">
+                    <span class="number">83</span>
+                    <span class="symbol">Bi</span>
+                    <span class="name">bismuth</span>
+                    <span class="weigth">208.980</span>
+                </div>
+                <div class="element col metalloids">
+                    <span class="number">84</span>
+                    <span class="symbol">Po</span>
+                    <span class="name">polonium</span>
+                    <span class="weigth">[209]</span>
+                </div>
+                <div class="element col halogens">
+                    <span class="number">85</span>
+                    <span class="symbol">At</span>
+                    <span class="name">astatine</span>
+                    <span class="weigth">[210]</span>
+                </div>
+                <div class="element col nobel_gases">
+                    <span class="number">86</span>
+                    <span class="symbol">Rn</span>
+                    <span class="name">radon</span>
+                    <span class="weigth">[222]</span>
+                </div>
+            </div>
+        </div>
+        <div class="block4">
+            <div class="row1">
+                <div class="groupCol">
+                    Lanthanoids
+                </div>
+                <div class="element col lanthanoids">
+                    <span class="number">57</span>
+                    <span class="symbol">La</span>
+                    <span class="name">lanthanium</span>
+                    <span class="weigth">138.905</span>
+                </div>
+                <div class="element col lanthanoids">
+                    <span class="number">58</span>
+                    <span class="symbol">Ce</span>
+                    <span class="name">cerium</span>
+                    <span class="weigth">140.116</span>
+                </div>
+                <div class="element col lanthanoids">
+                    <span class="number">59</span>
+                    <span class="symbol">Pr</span>
+                    <span class="name">praseodymium</span>
+                    <span class="weigth">140.907</span>
+                </div>
+                <div class="element col lanthanoids">
+                    <span class="number">60</span>
+                    <span class="symbol">Nd</span>
+                    <span class="name">neodymium</span>
+                    <span class="weigth">144.242</span>
+                </div>
+                <div class="element col lanthanoids">
+                    <span class="number">61</span>
+                    <span class="symbol">Pm</span>
+                    <span class="name">promethium</span>
+                    <span class="weigth">[145]</span>
+                </div>
+                <div class="element col lanthanoids">
+                    <span class="number">62</span>
+                    <span class="symbol">Sm</span>
+                    <span class="name">samarlum</span>
+                    <span class="weigth">150.360</span>
+                </div>
+                <div class="element col lanthanoids">
+                    <span class="number">63</span>
+                    <span class="symbol">Eu</span>
+                    <span class="name">europlum</span>
+                    <span class="weigth">151.954</span>
+                </div>
+                <div class="element col lanthanoids">
+                    <span class="number">64</span>
+                    <span class="symbol">Gd</span>
+                    <span class="name">gadolinlum</span>
+                    <span class="weigth">157.250</span>
+                </div>
+                <div class="element col lanthanoids">
+                    <span class="number">65</span>
+                    <span class="symbol">Tb</span>
+                    <span class="name">terbium</span>
+                    <span class="weigth">158.925</span>
+                </div>
+                <div class="element col lanthanoids">
+                    <span class="number">66</span>
+                    <span class="symbol">Dy</span>
+                    <span class="name">dysproslum</span>
+                    <span class="weigth">162.500</span>
+                </div>
+                <div class="element col lanthanoids">
+                    <span class="number">67</span>
+                    <span class="symbol">Ho</span>
+                    <span class="name">holmium</span>
+                    <span class="weigth">164.930</span>
+                </div>
+                <div class="element col lanthanoids">
+                    <span class="number">68</span>
+                    <span class="symbol">Er</span>
+                    <span class="name">erbium</span>
+                    <span class="weigth">167.259</span>
+                </div>
+                <div class="element col lanthanoids">
+                    <span class="number">69</span>
+                    <span class="symbol">Tm</span>
+                    <span class="name">thulium</span>
+                    <span class="weigth">168.934</span>
+                </div>
+                <div class="element col lanthanoids">
+                    <span class="number">70</span>
+                    <span class="symbol">Yb</span>
+                    <span class="name">ytterblum</span>
+                    <span class="weigth">173.040</span>
+                </div>
+                <div class="element col lanthanoids">
+                    <span class="number">71</span>
+                    <span class="symbol">Lu</span>
+                    <span class="name">lutetium</span>
+                    <span class="weigth">174.960</span>
+                </div>
+            </div>
+            <div class="row2">
+                <div class="groupCol">
+                    Actinoids
+                </div>
+                <div class="element col actinoids">
+                    <span class="number">89</span>
+                    <span class="symbol">Ac</span>
+                    <span class="name">actinium</span>
+                    <span class="weigth">[227]</span>
+                </div>
+                <div class="element col actinoids">
+                    <span class="number">90</span>
+                    <span class="symbol">Th</span>
+                    <span class="name">thorium</span>
+                    <span class="weigth">232.038</span>
+                </div>
+                <div class="element col actinoids">
+                    <span class="number">91</span>
+                    <span class="symbol">Pa</span>
+                    <span class="name">protactinium</span>
+                    <span class="weigth">231.035</span>
+                </div>
+                <div class="element col actinoids">
+                    <span class="number">92</span>
+                    <span class="symbol">U</span>
+                    <span class="name">uranium</span>
+                    <span class="weigth">238.028</span>
+                </div>
+                <div class="element col actinoids">
+                    <span class="number">93</span>
+                    <span class="symbol">Np</span>
+                    <span class="name">neptuanium</span>
+                    <span class="weigth">[237]</span>
+                </div>
+                <div class="element col actinoids">
+                    <span class="number">94</span>
+                    <span class="symbol">Pu</span>
+                    <span class="name">plutonium</span>
+                    <span class="weigth">[244]</span>
+                </div>
+                <div class="element col actinoids">
+                    <span class="number">95</span>
+                    <span class="symbol">Am</span>
+                    <span class="name">americium</span>
+                    <span class="weigth">[243]</span>
+                </div>
+                <div class="element col actinoids">
+                    <span class="number">96</span>
+                    <span class="symbol">Cm</span>
+                    <span class="name">curium</span>
+                    <span class="weigth">[247]</span>
+                </div>
+                <div class="element col actinoids">
+                    <span class="number">97</span>
+                    <span class="symbol">Bk</span>
+                    <span class="name">berkellum</span>
+                    <span class="weigth">[247]</span>
+                </div>
+                <div class="element col actinoids">
+                    <span class="number">98</span>
+                    <span class="symbol">Cf</span>
+                    <span class="name">callfornium</span>
+                    <span class="weigth">[251]</span>
+                </div>
+                <div class="element col actinoids">
+                    <span class="number">99</span>
+                    <span class="symbol">Es</span>
+                    <span class="name">einsteinium</span>
+                    <span class="weigth">[252]</span>
+                </div>
+                <div class="element col actinoids">
+                    <span class="number">100</span>
+                    <span class="symbol">Fm</span>
+                    <span class="name">fermlium</span>
+                    <span class="weigth">[257]</span>
+                </div>
+                <div class="element col actinoids">
+                    <span class="number">101</span>
+                    <span class="symbol">Md</span>
+                    <span class="name">mendelvium</span>
+                    <span class="weigth">[258]</span>
+                </div>
+                <div class="element col actinoids">
+                    <span class="number">102</span>
+                    <span class="symbol">No</span>
+                    <span class="name">nobelium</span>
+                    <span class="weigth">[259]</span>
+                </div>
+                <div class="element col actinoids">
+                    <span class="number">103</span>
+                    <span class="symbol">Lr</span>
+                    <span class="name">lawreanclum</span>
+                    <span class="weigth">[262]</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
